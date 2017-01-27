@@ -1,5 +1,4 @@
 ---
-# Ensure all variables are present to start with:
 - name: verify all required variables are set
   fail:
     msg: "Variable: '{{ item }}' is not defined!"
@@ -7,5 +6,42 @@
   with_items:
     - directadmin_license_id
 
-# Ensure prerequisites are installed for supported OS
-- include: packages.yml
+- name: ensure dependencies for debian
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 86400
+    state: present
+  with_items:
+    - gcc
+    - g++
+    - make
+    - flex
+    - bison
+    - openssl
+    - libssl-dev
+    - perl
+    - perl-base
+    - perl-modules
+    - libperl-dev
+    - libaio1
+    - libaio-dev
+    - zlib1g
+    - zlib1g-dev
+    - libcap-dev
+    - bzip2
+    - automake
+    - autoconf
+    - libtool
+    - cmake
+    - pkg-config
+    - python
+    - libdb-dev
+    - libsasl2-dev
+    - libncurses5-dev
+    - libsystemd-dev
+    - bind9
+    - quota
+    - libsystemd-daemon0
+    - patch
+    - libjemalloc-dev

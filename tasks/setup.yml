@@ -1,4 +1,11 @@
 ---
+- name: ensure the custombuild is set
+  copy:
+    content: "2.0"
+    dest: /usr/src/.custombuild
+    force: no
+    mode: 0644
+
 - name: obtain setup.sh script
   get_url:
     url: "{{ directadmin_setup_url }}"
@@ -8,13 +15,6 @@
   file:
     path: "{{ directadmin_setup_path }}/setup.sh"
     mode: 0755
-
-- name: "Set up custombuild version"
-  copy:
-    content: "2.0"
-    dest: /usr/src/.custombuild
-    force: no
-    mode: 644
 
 - name: install directadmin
   command: "{{ directadmin_setup_path }}/setup.sh {{ directadmin_client_id }} {{ directadmin_license_id }} {{ inventory_hostname }} {{ directadmin_setup_interface }} {{ ansible_eth0.ipv4.address }}"
