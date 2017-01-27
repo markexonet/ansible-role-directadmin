@@ -10,9 +10,10 @@
     mode: 0755
 
 - name: ensure custombuild version is set
-  fail:
-    msg: "CustomBuild is not set!"
-  when: not directadmin_custombuild_version is defined
+  template:
+    src: .custombuild.j2
+    dest: "{{ directadmin_setup_path }}/.custombuild"
+    mode: 0644
 
 - name: run setup
   command: "{{ directadmin_setup_path }}/setup.sh {{ directadmin_client_id }} {{ directadmin_license_id }} {{ inventory_hostname }} eth0 {{ ansible_eth0.ipv4.address }}"
