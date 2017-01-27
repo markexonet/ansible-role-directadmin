@@ -7,3 +7,4 @@ directadmin_client_id: 441
 # directadmin_license_id:
 directadmin_custombuild_version: 2.0
 directadmin_custombuild_path: /usr/local/directadmin/custombuild
+directadmin_setup_interface: "eth0"
