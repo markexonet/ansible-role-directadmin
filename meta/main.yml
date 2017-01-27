@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Exonet B.V.
+  description: DirectAdmin Install
+  company: Exonet B.V.
+  min_ansible_version: 2.1
+  platforms:
+    - name: Debian
+      versions:
+        - wheezy
+        - jessie
+    - name: Ubuntu
+      versions:
+        - precise
+        - trusty
+  dependencies: []

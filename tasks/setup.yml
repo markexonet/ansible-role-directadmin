@@ -1,0 +1,20 @@
+---
+- name: obtain setup.sh script
+  get_url:
+    url: "{{ directadmin_setup_url }}"
+    dest: "{{ directadmin_setup_path }}"
+
+- name: ensure proper permissions on setup.sh
+  file:
+    path: "{{ directadmin_setup_path }}/setup.sh"
+    mode: 0755
+
+- name: ensure custombuild version is set
+  fail:
+    msg: "CustomBuild is not set!"
+  when: not directadmin_custombuild_version is defined
+
+- name: run setup
+  command: "{{ directadmin_setup_path }}/setup.sh {{ directadmin_client_id }} {{ directadmin_license_id }} {{ inventory_hostname }} eth0 95.97.186.170"
+  register: setup_output
+  when: directadmin_install
