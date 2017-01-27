@@ -17,4 +17,4 @@
     mode: 644
 
 - name: install directadmin
-  command: "{{ directadmin_setup_path }}/setup.sh {{ directadmin_client_id }} {{ directadmin_license_id }} {{ inventory_hostname }} {{ interface }} {{ ansible_eth0.ipv4.address }}"
+  command: "{{ directadmin_setup_path }}/setup.sh {{ directadmin_client_id }} {{ directadmin_license_id }} {{ inventory_hostname }} {{ directadmin_setup_interface }} {{ ansible_eth0.ipv4.address }}"
