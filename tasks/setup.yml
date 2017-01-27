@@ -12,9 +12,9 @@
 - name: "Set up custombuild version"
   copy:
     content: "2.0"
-    dest: /root/.custombuild
+    dest: /usr/src/.custombuild
     force: no
     mode: 644
 
 - name: install directadmin
-  command: /root/setup.sh {{ client_id }} {{ license_id }} {{ inventory_hostname }} {{ interface }}
+  command: "{{ directadmin_setup_path }}/setup.sh {{ client_id }} {{ license_id }} {{ inventory_hostname }} {{ interface }} {{ ansible_eth0.ipv4.address }}"
