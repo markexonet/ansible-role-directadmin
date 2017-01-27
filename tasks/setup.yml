@@ -9,13 +9,12 @@
     path: "{{ directadmin_setup_path }}/setup.sh"
     mode: 0755
 
-- name: ensure custombuild version is set
-  template:
-    src: .custombuild.j2
-    dest: "{{ directadmin_setup_path }}/.custombuild"
-    mode: 0644
+- name: "Set up custombuild version"
+  copy:
+    content: "2.0"
+    dest: /root/.custombuild
+    force: no
+    mode: 644
 
-- name: run setup
-  command: "{{ directadmin_setup_path }}/setup.sh {{ directadmin_client_id }} {{ directadmin_license_id }} {{ inventory_hostname }} eth0 {{ ansible_eth0.ipv4.address }}"
-  register: setup_output
-  when: directadmin_install
+- name: install directadmin
+  command: /root/setup.sh {{ client_id }} {{ license_id }} {{ inventory_hostname }} {{ interface }}
