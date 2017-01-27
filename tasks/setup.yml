@@ -2,7 +2,7 @@
 - name: ensure the custombuild is set
   copy:
     content: "2.0"
-    dest: /usr/src/.custombuild
+    dest: "{{ directadmin_setup_path }}/.custombuild"
     force: no
     mode: 0644
 

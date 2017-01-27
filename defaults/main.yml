@@ -2,7 +2,7 @@
 # Directadmin automated setup - http://help.directadmin.com/item.php?id=578
 directadmin_install: true
 directadmin_setup_url: http://www.directadmin.com/setup.sh
-directadmin_setup_path: /usr/src/
+directadmin_setup_path: /root
 directadmin_client_id: 441
 # directadmin_license_id:
 directadmin_custombuild_version: 2.0
