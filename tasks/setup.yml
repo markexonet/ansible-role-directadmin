@@ -15,6 +15,6 @@
   when: not directadmin_custombuild_version is defined
 
 - name: run setup
-  command: "{{ directadmin_setup_path }}/setup.sh {{ directadmin_client_id }} {{ directadmin_license_id }} {{ inventory_hostname }} eth0 95.97.186.170"
+  command: "{{ directadmin_setup_path }}/setup.sh {{ directadmin_client_id }} {{ directadmin_license_id }} {{ inventory_hostname }} eth0 {{ ansible_eth0.ipv4.address }}"
   register: setup_output
   when: directadmin_install
