@@ -1,0 +1,82 @@
+---
+
+- name: ensure spamassassin is installed
+  fail:
+    msg: SpamAssassin is not installed!
+  when: not build_spamassassin.stat.exist
+
+- name: ensure dependencies for spamblocker
+    apt:
+    name: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 3600s
+    state: present
+  with_items:
+    -gcc 
+    -g++ 
+    -make 
+    -flex 
+    -bison 
+    -openssl 
+    -libssl-dev 
+    -perl 
+    -perl-base 
+    -perl-modules 
+    -libperl-dev 
+    -libaio1 
+    -libaio-dev
+    -zlib1g zlib1g-dev 
+    -libcap-dev 
+    -cron 
+    -bzip2 
+    -automake 
+    -autoconf 
+    -libtool 
+    -cmake 
+    -pkg-config 
+    -python 
+    -libdb-dev 
+    -libsasl2-dev
+    -libncurses5-dev 
+    -libsystemd-dev 
+    -bind9 
+    -dnsutils 
+    -quota 
+    -libsystemd-daemon0 
+    -patch 
+    -libjemalloc-dev 
+    -logrotate 
+    -rsyslog 
+    -libc6-dev
+
+- name: update DirectAdmin custombuild
+  command: /usr/local/directadmin/custombuild/build update
+  register: build_update
+
+- name: ensure eximconf_release is ok
+  lineinfile:
+    path: /usr/local/directadmin/custombuild/options.conf
+    line: 'eximconf_release=4.4'
+    state: present
+
+- name: build exim
+  command: /usr/local/directadmin/custombuild/build exim
+  register: build_exim
+
+- name: build SpamAssassin
+  command: /usr/local/directadmin/custombuild/build spamassassin
+  register: build_spamassassin
+
+- name: build update
+  command: /usr/local/directadmin/custombuild/build update
+  register: build_update
+
+- name: build exim_conf
+  command: /usr/local/directadmin/custombuild/build exim_conf
+  register: build_eximconf
+  notify: restart directadmin
+
+- name: ensure the skip hosts file exists
+  template:
+    src: config/esf_skip_hosts.j2
+    dest: /etc/virtual/esf_skip_hosts

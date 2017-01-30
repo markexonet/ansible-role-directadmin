@@ -1,0 +1,12 @@
+---
+- name: update DirectAdmin custombuild
+  command: /usr/local/directadmin/custombuild/build update
+  register: build_update
+
+- name: build apache
+  command: /usr/local/directadmin/custombuild/build apache
+  register: build_apache
+
+- name: build php
+  command: /usr/local/directadmin/custombuild/build php d
+  register: build_php

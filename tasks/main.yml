@@ -1,3 +1,26 @@
 ---
 - include: prerequisites.yml
 - include: setup.yml
+
+- include: php.yml
+  when: php.changed and directadmin_install.stat.exists
+- include: ioncube_loader.yml
+  when: ioncube_loader.changed and directadmin_install.stat.exists
+- include: mysql.yml
+  when: mysql.changed and directadmin_install.stat.exists
+- include: apache.yml
+  when: apache.changed and directadmin_install.stat.exists
+- include: eximconf.yml
+  when: eximconf.changed and directadmin_install.stat.exists
+- include: spamassassin.yml
+  when: spamassassin.changed and directadmin_install.stat.exists
+- include: easy_spam_fighter.yml
+  when: easu_spam_fighter.changed and directadmin_install.stat.exists
+- include: custombuild.yml
+  when: custombuild.changed and directadmin_install.stat.exists
+- include: letsencrypt.yml
+  when: letsencrypt.changed and directadmin_install.stat.exists
+- include: dkim.yml
+  when: dkim.changed and directadmin_install.stat.exists
+- include: opcache.yml
+  when: opcache.changed and directadmin_install.stat.exists

@@ -1,10 +1,18 @@
 ---
-# Directadmin automated setup - http://help.directadmin.com/item.php?id=578
 directadmin_install: true
 directadmin_setup_url: http://www.directadmin.com/setup.sh
 directadmin_setup_path: /root
 directadmin_client_id: 441
-# directadmin_license_id:
-directadmin_custombuild_version: 2.0
 directadmin_custombuild_path: /usr/local/directadmin/custombuild
 directadmin_setup_interface: "eth0"
+
+php: 5.6
+ioncube_loader: yes
+mysql: 5.6
+apache: 2.4
+eximconf: 4.4
+spamassassin: yes
+spamblocker: no
+letsencrypt: 0
+dkim: 0
+opcache: no

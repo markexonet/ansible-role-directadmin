@@ -1,0 +1,12 @@
+---
+- name: ensure exim config for dkim exist
+  get_url:
+    url: http://files.directadmin.com/services/exim.dkim.conf
+    dest: /etc/exim.dkim.conf
+
+- name: ensure file is readable by exim
+  lininfile:
+    path: /etc/exim.conf
+    line: .include_if_exists /etc/exim.dkim.conf
+    state: present
+  notify: restart exim

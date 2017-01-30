@@ -1,0 +1,13 @@
+---
+- name: update DirectAdmin custombuild
+  command: /usr/local/directadmin/custombuild/build update
+  register: build_update
+
+- name: build apache
+  command: /usr/local/directadmin/custombuild/build apache
+  register: build_mysql
+
+- name: recompile php
+  command: /usr/local/directadmin/custombuild/build php n
+  register: recompile_php
+  notify: restart apache

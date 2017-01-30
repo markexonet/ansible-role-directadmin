@@ -1,0 +1,4 @@
+---
+- name: build opcache
+  command: /usr/local/directadmin/custombuild/build opcache
+  register: build_opcache

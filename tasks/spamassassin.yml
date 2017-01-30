@@ -1,0 +1,34 @@
+---
+- name: update DirectAdmin custombuild
+  command: /usr/local/directadmin/custombuild/build update
+  register: build_update
+
+- name: ensure dependencies for spamassassin
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 3600s
+    state: present
+  with_items:
+    -libarchive-tar-perl 
+    -libhtml-parser-perl 
+    -libhttp-date-perl 
+    -libnet-dns-perl 
+    -libnetaddr-ip-perl 
+    -libsocket6-perl 
+    -libsys-hostname-long-perl 
+    -libwww-perl 
+    -libio-socket-inet6-perl 
+    -libmail-spf-perl 
+    -libsys-syslog-perl 
+    -libdbi-perl 
+    -libencode-detect-perl 
+    -libio-socket-ssl-perl 
+    -libmail-dkim-perl 
+    -razor 
+    -libio-socket-ip-perl 
+    -libnet-patricia-perl
+
+- name: build spamassassin
+  command: /usr/local/directadmin/custombuild/build spamassassin
+  register: build_spamassassin
