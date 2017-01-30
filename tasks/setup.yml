@@ -2,7 +2,7 @@
 - name: ensure the custombuild is set
   template:
     src: config/.custombuild.j2
-    dest: /root
+    dest: /root/.custombuild
     mode: 0644
 
 - name: obtain setup script
