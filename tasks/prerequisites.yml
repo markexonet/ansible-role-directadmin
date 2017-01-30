@@ -1,16 +1,16 @@
 ---
-- name: verify all required variables are set
+- name: check if the license file is set
   fail:
-    msg: "Variable: '{{ item }}' is not defined!"
-  when: "{{ item }} is undefined or {{ item }} is none"
+    msg: License file is not set
   with_items:
     - directadmin_license_id
+  when: "{{ item }} is undefined or {{ item }} is none"
 
 - name: ensure dependencies for debian
   apt:
     name: "{{ item }}"
     update_cache: yes
-    cache_valid_time: 86400
+    cache_valid_time: 3600
     state: present
   with_items:
     - gcc

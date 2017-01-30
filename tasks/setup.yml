@@ -1,12 +1,11 @@
 ---
 - name: ensure the custombuild is set
-  copy:
-    content: "2.0"
-    dest: "{{ directadmin_setup_path }}/.custombuild"
-    force: no
+  template:
+    src: config/.custombuild.j2
+    dest: /root
     mode: 0644
 
-- name: obtain setup.sh script
+- name: obtain setup script
   get_url:
     url: "{{ directadmin_setup_url }}"
     dest: "{{ directadmin_setup_path }}"
