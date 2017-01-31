@@ -4,8 +4,8 @@
     url: https://files.directadmin.com/services/exim.dkim.conf
     dest: /etc/exim.dkim.conf
 
-- name: ensure file is readable by exim
-  lininfile:
+- name: ensure configfile is readable by exim
+  lineinfile:
     path: /etc/exim.conf
     line: '.include_if_exists /etc/exim.dkim.conf'
     state: present
