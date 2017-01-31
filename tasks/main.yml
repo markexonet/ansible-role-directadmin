@@ -3,22 +3,22 @@
 - include: setup.yml
 
 - include: php.yml
-  when: php.changed and directadmin_install.stat.exists
+  when: php.changed
 - include: ioncube_loader.yml
-  when: ioncube_loader.changed and directadmin_install.stat.exists
+  when: ioncube_loader.changed
 - include: mysql.yml
-  when: mysql.changed and directadmin_install.stat.exists
+  when: mysql.changed
 - include: apache.yml
-  when: apache.changed and directadmin_install.stat.exists
+  when: apache.changed
 - include: eximconf.yml
-  when: eximconf.changed and directadmin_install.stat.exists
+  when: eximconf.changed
 - include: spamassassin.yml
-  when: spamassassin.changed and directadmin_install.stat.exists
+  when: spamassassin.changed
 - include: easy_spam_fighter.yml
-  when: easu_spam_fighter.changed and directadmin_install.stat.exists
+  when: easu_spam_fighter.changed
 - include: letsencrypt.yml
-  when: letsencrypt.changed and directadmin_install.stat.exists
+  when: letsencrypt.changed
 - include: dkim.yml
-  when: dkim.changed and directadmin_install.stat.exists
+  when: dkim.changed
 - include: opcache.yml
-  when: opcache.changed and directadmin_install.stat.exists
+  when: opcache.changed
