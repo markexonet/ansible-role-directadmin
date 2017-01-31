@@ -16,8 +16,6 @@
   when: spamassassin.changed and directadmin_install.stat.exists
 - include: easy_spam_fighter.yml
   when: easu_spam_fighter.changed and directadmin_install.stat.exists
-- include: custombuild.yml
-  when: custombuild.changed and directadmin_install.stat.exists
 - include: letsencrypt.yml
   when: letsencrypt.changed and directadmin_install.stat.exists
 - include: dkim.yml
