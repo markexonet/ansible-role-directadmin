@@ -1,6 +1,6 @@
 ---
 directadmin_install: true
-directadmin_setup_url: http://www.directadmin.com/setup.sh
+directadmin_setup_url: https://www.directadmin.com/setup.sh
 directadmin_setup_path: /root
 directadmin_client_id: 441
 directadmin_custombuild_path: /usr/local/directadmin/custombuild
