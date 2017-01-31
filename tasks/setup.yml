@@ -9,20 +9,20 @@
     src: config/.custombuild.j2
     dest: /root/.custombuild
     mode: 0644
-  when: directadmin.stat.not.exists
+  when: not directadmin.stat.exists
 
 - name: obtain setup script
   get_url:
     url: "{{ directadmin_setup_url }}"
     dest: "{{ directadmin_setup_path }}"
-  when: directadmin.stat.not.exists
+  when: not directadmin.stat.exists
 
 - name: ensure proper permissions on setup.sh
   file:
     path: "{{ directadmin_setup_path }}/setup.sh"
     mode: 0755
-  when: directadmin.stat.not.exists
+  when: not directadmin.stat.exists
 
 - name: install directadmin
   command: "{{ directadmin_setup_path }}/setup.sh {{ directadmin_client_id }} {{ directadmin_license_id }} {{ inventory_hostname }} {{ directadmin_setup_interface }} {{ ansible_eth0.ipv4.address }}"
-  when: directadmin.stat.not.exists
+  when: not directadmin.stat.exists
