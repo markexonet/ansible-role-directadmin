@@ -7,12 +7,12 @@ directadmin_custombuild_path: /usr/local/directadmin/custombuild
 directadmin_setup_interface: "eth0"
 
 php: 5.6
-ioncube_loader:'yes'
+ioncube_loader:yes
 mysql: 5.6
 apache: 2.4
 eximconf: 4.4
-spamassassin: 'yes'
-spamblocker: 'no'
+spamassassin:yes
+spamblocker: no
 letsencrypt: 0
 dkim: 0
-opcache: 'no'
+opcache:no
