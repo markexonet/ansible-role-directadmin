@@ -11,7 +11,7 @@
     src: config/.lan.j2
     dest: /root/.lan
     mode: 0644
-  when: not directadmin.stat.exists and vagrant
+  when: vagrant and not directadmin.stat.exists
 
 - name: obtain setup script
   get_url:
@@ -33,5 +33,5 @@
   lineinfile:
     path: /usr/local/directadmin/conf/directadmin.conf
     line: "lan_ip={{ ansible_eth0.ipv4.address }}"
-  when: not directadmin.stat.exists and vagrant
+  when: vagrant and not directadmin.stat.exists
   notify: restart directadmin
