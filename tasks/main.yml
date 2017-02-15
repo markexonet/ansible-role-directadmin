@@ -7,7 +7,7 @@
   register: da_apache_version
   changed_when: false
 
-  include: tasks/apache.yml
+- include: tasks/apache.yml
 
 - name: check which version of php is defined in options.conf
   shell: "cat /usr/local/directadmin/custombuild/options.conf | awk -F= '/php1_rel/{print $2}'"
