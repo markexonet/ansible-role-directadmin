@@ -1,16 +1,13 @@
 ---
 - name: update DirectAdmin custombuild
   command: "/usr/local/directadmin/custombuild/build update"
-  register: build_update
   when: "apache_version not in da_apache_version.stdout"
 
 - name: build apache
   command: "/usr/local/directadmin/custombuild/build apache"
-  register: build_mysql
   when: "apache_version not in da_apache_version.stdout"
 
 - name: recompile php
   command: "/usr/local/directadmin/custombuild/build php n"
-  register: recompile_php
   notify: restart apache
   when: "apache_version not in da_apache_version.stdout"
