@@ -1,9 +1,4 @@
 ---
-- name: check if directadmin is installed
-  stat:
-    path: /usr/local/directadmin/conf/directadmin.conf
-  register: directadmin
-
 - name: ensure the custombuild is set
   template:
     src: config/.custombuild.j2

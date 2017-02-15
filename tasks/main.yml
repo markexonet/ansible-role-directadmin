@@ -10,3 +10,12 @@
 - name: include apache task when version changes
   include: tasks/apache.yml
   when: "apache_version not in da_apache_version.stdout"
+
+- name: check which version of php is defined in options.conf
+  shell: "cat /usr/local/directadmin/custombuild/options.conf | awk -F= '/php1_rel/{print $2}'"
+  register: da_php_version
+  changed_when: false
+
+- name: include php task when version changes
+  include: tasks/php.yml
+  when: "php_version not in da_php_version.stdout"

@@ -1,10 +1,15 @@
 ---
+- name: check if directadmin is installed
+  stat:
+    path: /usr/local/directadmin/conf/directadmin.conf
+  register: directadmin
+
 - name: check if the license file is set
   fail:
     msg: License file is not set
   with_items:
     - directadmin_license_id
-  when: "{{ item }} is undefined or {{ item }} is none"
+  when: "{{ item }} is undefined or {{ item }} is none or not directadmin.stat.exists"
 
 - name: ensure dependencies for debian
   apt:
@@ -45,3 +50,4 @@
     - libsystemd-daemon0
     - patch
     - libjemalloc-dev
+  when: not directadmin.stat.exists
