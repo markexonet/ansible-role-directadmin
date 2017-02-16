@@ -1,3 +1,4 @@
 ---
 - include: prerequisites.yml
 - include: setup.yml
+- include: software.yml
