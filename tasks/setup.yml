@@ -4,34 +4,20 @@
     src: config/.custombuild.j2
     dest: /root/.custombuild
     mode: 0644
-  when: not directadmin.stat.exists
-
-- name: ensure the local ip is set
-  template:
-    src: config/.lan.j2
-    dest: /root/.lan
-    mode: 0644
-  when: vagrant and not directadmin.stat.exists
+  when: not directadmin_installed.stat.exists
 
 - name: obtain setup script
   get_url:
     url: "{{ directadmin_setup_url }}"
     dest: "{{ directadmin_setup_path }}"
-  when: not directadmin.stat.exists
+  when: not directadmin_installed.stat.exists
 
 - name: ensure proper permissions on setup.sh
   file:
     path: "{{ directadmin_setup_path }}/setup.sh"
     mode: 0755
-  when: not directadmin.stat.exists
+  when: not directadmin_installed.stat.exists
 
 - name: install directadmin
   command: "{{ directadmin_setup_path }}/setup.sh {{ directadmin_client_id }} {{ directadmin_license_id }} {{ inventory_hostname }} {{ directadmin_setup_interface }} {{ ansible_eth0.ipv4.address }}"
-  when: not directadmin.stat.exists
-
-- name: ensure local ip is set in directadmin.conf
-  lineinfile:
-    path: /usr/local/directadmin/conf/directadmin.conf
-    line: "lan_ip={{ ansible_eth0.ipv4.address }}"
-  when: vagrant and not directadmin.stat.exists
-  notify: restart directadmin
+  when: not directadmin_installed.stat.exists
